@@ -17,6 +17,14 @@ public class AuthorizationService {
         return hasRole(PermissionDic.CREATE_USER.name());
     }
 
+    public boolean hasAccessToReadHospital() {
+        return hasRole(PermissionDic.READ_HOSPITAL.name());
+    }
+
+    public boolean hasAccessToWriteAppointment() {
+        return hasRole(PermissionDic.WRITE_APPOINTMENT.name());
+    }
+
     private boolean hasRole(String role) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
