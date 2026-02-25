@@ -14,7 +14,11 @@ public class AuthorizationService {
     }
 
     public boolean hasAccessToWriteUser() {
-        return hasRole(PermissionDic.CREATE_USER.name());
+        return hasRole(PermissionDic.CREATE_USER.name()) || hasRole(PermissionDic.WRITE_USER.name());
+    }
+
+    public boolean hasAccessToDeleteUser() {
+        return hasRole(PermissionDic.DELETE_USER.name());
     }
 
     public boolean hasAccessToReadHospital() {
@@ -23,6 +27,26 @@ public class AuthorizationService {
 
     public boolean hasAccessToWriteAppointment() {
         return hasRole(PermissionDic.WRITE_APPOINTMENT.name());
+    }
+
+    public boolean hasAccessToReadAppointments() {
+        return hasRole(PermissionDic.READ_APPOINTMENTS.name());
+    }
+
+    public boolean hasAccessToUpdateAppointmentStatus() {
+        return hasRole(PermissionDic.UPDATE_APPOINTMENT_STATUS.name());
+    }
+
+    public boolean hasAccessToCancelAppointment() {
+        return hasRole(PermissionDic.CANCEL_APPOINTMENT.name());
+    }
+
+    public boolean hasAccessToWriteHospital() {
+        return hasRole(PermissionDic.WRITE_HOSPITAL.name());
+    }
+
+    public boolean hasAccessToReadAllUsers() {
+        return hasRole(PermissionDic.READ_ALL_USERS.name());
     }
 
     private boolean hasRole(String role) {

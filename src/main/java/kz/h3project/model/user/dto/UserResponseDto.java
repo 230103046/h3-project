@@ -1,4 +1,4 @@
-package kz.h3project.model.hospital.dto;
+package kz.h3project.model.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,14 +11,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AppointmentDto {
+public class UserResponseDto {
 
     private Long id;
-    private Long userId;
     private String username;
-    private Long hospitalId;
-    private String hospitalName;
-    private LocalDateTime scheduledAt;
-    private String status;
+    private String email;
+    private boolean enabled;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
