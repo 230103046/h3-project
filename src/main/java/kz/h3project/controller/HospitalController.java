@@ -13,6 +13,7 @@ import kz.h3project.model.user.entity.User;
 import kz.h3project.repository.AppointmentRepository;
 import kz.h3project.repository.HospitalRepository;
 import kz.h3project.repository.UserRepository;
+import kz.h3project.service.AppointmentEventProducer;
 import kz.h3project.service.HospitalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,7 @@ public class HospitalController {
     private final HospitalRepository hospitalRepository;
     private final AppointmentRepository appointmentRepository;
     private final UserRepository userRepository;
+    private final AppointmentEventProducer appointmentEventProducer;
 
     @Operation(summary = "Список больниц по городу", description = "При передаче latitude/longitude возвращаются ближайшие первыми")
     @PreAuthorize("@authorization.hasAccessToReadHospital()")
@@ -64,6 +66,7 @@ public class HospitalController {
                 .status("PENDING")
                 .build();
         appointment = appointmentRepository.save(appointment);
+        appointmentEventProducer.sendAppointmentCreated(appointment);
 
         AppointmentDto dto = toAppointmentDto(appointment);
         return ResponseEntity.ok(dto);
