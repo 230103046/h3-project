@@ -4,6 +4,7 @@ import kz.h3project.events.AppointmentCreatedEvent;
 import kz.h3project.model.hospital.entity.Appointment;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,12 @@ import static kz.h3project.config.KafkaTopicConfig.TOPIC_APPOINTMENTS;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AppointmentEventProducer {
+@ConditionalOnProperty(prefix = "app.kafka", name = "enabled", havingValue = "true")
+public class KafkaAppointmentEventProducer implements IAppointmentEventProducer {
 
     private final KafkaTemplate<String, AppointmentCreatedEvent> kafkaTemplate;
 
+    @Override
     public void sendAppointmentCreated(Appointment appointment) {
         AppointmentCreatedEvent event = AppointmentCreatedEvent.builder()
                 .appointmentId(appointment.getId())

@@ -1,20 +1,10 @@
+app:
+  kafka:
+    enabled: false  # true — только если поднят Kafka (docker compose). При timeout при pull оставьте false.
+
 spring:
   application:
     name: h3-project
-
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: h3-project-consumer
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: "kz.h3project.events"
-        spring.json.value.default.type: "kz.h3project.events.AppointmentCreatedEvent"
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
   datasource:
     driver-class-name: org.postgresql.Driver

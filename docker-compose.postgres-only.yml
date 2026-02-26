@@ -1,0 +1,11 @@
+# Только Postgres — когда Kafka не нужна или не тянется из-за сети.
+# Запуск: docker compose -f docker-compose.postgres-only.yml up -d
+services:
+  h3-project-postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: "h3_project_db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"

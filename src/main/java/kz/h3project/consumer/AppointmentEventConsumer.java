@@ -5,10 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+
 import static kz.h3project.config.KafkaTopicConfig.TOPIC_APPOINTMENTS;
 
 @Slf4j
 @Component
+@ConditionalOnProperty(prefix = "app.kafka", name = "enabled", havingValue = "true")
 public class AppointmentEventConsumer {
 
     @KafkaListener(topics = TOPIC_APPOINTMENTS, groupId = "h3-project-consumer")
